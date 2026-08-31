@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+*.local
+
+# Credentials
+.git-credentials
+.git-localsigningkey
+
+# Secrets
+*.key
+*.pem

@@ -1,0 +1,33 @@
+{
+  "name": "@gfam/imap-server",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "IMAP/SMTP MCP Server - email operations via Model Context Protocol",
+  "main": "dist/index.js",
+  "bin": {
+    "imap-server": "dist/index.js"
+  },
+  "files": [
+    "dist/",
+    "src/"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "^2.0.0",
+    "imapflow": "^1.7.0",
+    "nodemailer": "^9.0.0",
+    "mailparser": "^3.9.0",
+    "zod": "^4.0.0",
+    "dotenv": "^17.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "@types/node": "^22.0.0",
+    "@types/nodemailer": "^8.0.0",
+    "tsx": "^4.19.0"
+  }
+}
