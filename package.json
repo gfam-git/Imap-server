@@ -1,6 +1,6 @@
 {
-  "name": "@gfam/imap-server",
-  "version": "0.1.0",
+  "name": "@adam-gfam/imap-server",
+  "version": "0.1.1",
   "type": "module",
   "description": "IMAP/SMTP MCP Server - email operations via Model Context Protocol",
   "main": "dist/index.js",
