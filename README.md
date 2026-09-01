@@ -5,13 +5,16 @@ A Node.js IMAP/SMTP MCP server that provides email operations via the Model Cont
 ## Quick Start
 
 ```bash
+# Install and run locally
 npm install @adam-gfam/imap-server
-npx @adam-gfam/imap-server
+
+# OR run without installing
+npx -y @adam-gfam/imap-server
 ```
 
 ## Configuration
 
-Copy `.env.example` to `.env` and fill in your IMAP/SMTP credentials. See the full [Configuration Guide](https://nc.nousresearch.com/apps/collectives/Simple%20IMAP%20MCP%20Project/Configuration%20Guide) for details.
+Copy `.env.example` to `.env` and fill in your IMAP/SMTP credentials. See the full [Configuration Guide](https://our.gfam.my.id/apps/collectives/p/MGwd9JDeJ9wGDzS/Simple-IMAP-MCP-Project-2/Configuration%20Guide) for details.
 
 ## Usage
 
@@ -62,16 +65,16 @@ Once the server is running, it exposes the following tools, resources, and promp
 
 ## Documentation
 
-All project documentation is hosted in the [Simple IMAP MCP Project collective](https://nc.nousresearch.com/apps/collectives/Simple%20IMAP%20MCP%20Project):
+All project documentation is hosted in the [Simple IMAP MCP Project collective](https://our.gfam.my.id/apps/collectives/p/MGwd9JDeJ9wGDzS/Simple-IMAP-MCP-Project-2):
 
-- [Project Overview](https://nc.nousresearch.com/apps/collectives/Simple%20IMAP%20MCP%20Project/Project%20Overview) — Architecture, tech stack, project structure
-- [API Reference](https://nc.nousresearch.com/apps/collectives/Simple%20IMAP%20MCP%20Project/API%20Reference) — Complete tool and resource API docs
-- [Source Code Index](https://nc.nousresearch.com/apps/collectives/Simple%20IMAP%20MCP%20Project/Source%20Code%20Index) — Source file inventory
-- [Configuration Guide](https://nc.nousresearch.com/apps/collectives/Simple%20IMAP%20MCP%20Project/Configuration%20Guide) — Env vars, installation, setup
+- [Project Overview](https://our.gfam.my.id/apps/collectives/p/MGwd9JDeJ9wGDzS/Simple-IMAP-MCP-Project-2/Project%20Overview) — Architecture, tech stack, project structure
+- [API Reference](https://our.gfam.my.id/apps/collectives/p/MGwd9JDeJ9wGDzS/Simple-IMAP-MCP-Project-2/API%20Reference) — Complete tool and resource API docs
+- [Source Code Index](https://our.gfam.my.id/apps/collectives/p/MGwd9JDeJ9wGDzS/Simple-IMAP-MCP-Project-2/Source%20Code%20Index) — Source file inventory
+- [Configuration Guide](https://our.gfam.my.id/apps/collectives/p/MGwd9JDeJ9wGDzS/Simple-IMAP-MCP-Project-2/Configuration%20Guide) — Env vars, installation, setup
 
 ## Contributing
 
-**All future design and technical documents must be created directly in the [Nextcloud collective](https://nc.nousresearch.com/apps/collectives/Simple%20IMAP%20MCP%20Project), not locally.** The collective is the single source of truth for all project documentation.
+**All future design and technical documents must be created directly in the [Nextcloud collective](https://our.gfam.my.id/apps/collectives/p/MGwd9JDeJ9wGDzS/Simple-IMAP-MCP-Project-2), not locally.** The collective is the single source of truth for all project documentation.
 
 ## Tech Stack
 
