@@ -1,5 +1,5 @@
 {
-  "name": "@gfam/imap-server",
+  "name": "@adam-gfam/imap-server",
   "version": "0.1.1",
   "type": "module",
   "description": "IMAP/SMTP MCP Server - email operations via Model Context Protocol",
