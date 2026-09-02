@@ -1,17 +1,18 @@
 import { config as appConfig, type AppConfig } from '../config.js';
 import { getImapClient } from '../connection.js';
+import { getConverter } from '../markdown.js';
 import { EmailBodyResponseSchema, type EmailBodyResponse } from '../schema.js';
 
 export async function getEmailBody(
   credentials: AppConfig,
   opts: {
     uid: number;
-    folder?: string;
-    text_only?: boolean;
+    folder?: string
   }
 ): Promise<EmailBodyResponse> {
   const cfg = credentials;
   const client = await getImapClient(cfg);
+  const converter = getConverter();
 
   const folder = opts.folder || 'INBOX';
   await client.mailboxOpen(folder);
@@ -25,13 +26,18 @@ export async function getEmailBody(
   const result: EmailBodyResponse = {};
 
   if (msg && 'source' in msg && msg.source) {
-    const parsed = await parseEmailSource(msg.source, opts.text_only ?? false);
-    if (parsed.text) {
-      result.body_text = parsed.text;
-    }
-    if (parsed.html) {
-      result.body_html = parsed.html;
-    }
+    result.body = await parseEmailSource(msg.source, false).then((parsed) => {
+      // return JSON.stringify(msg.bodyStructure, null, 2);
+      return msg.source?.toString('binary');
+
+      // if (parsed.html) {
+      //   return converter.translate(parsed.html);
+      // } else if (parsed.text) {
+      //   return parsed.text;
+      // } else {
+      //   return '';
+      // }
+    });
   }
 
   await client.mailboxClose();

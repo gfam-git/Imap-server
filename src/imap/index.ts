@@ -40,8 +40,7 @@ const fetchEmailParams = z.object({
 
 const getEmailBodyParams = z.object({
   uid: z.number().int().positive().describe('Message UID'),
-  folder: z.string().optional().describe('IMAP folder'),
-  text_only: z.boolean().optional().describe('If true, return only plain text'),
+  folder: z.string().optional().describe('IMAP folder')
 });
 
 const getEmailHeadersParams = z.object({
@@ -166,7 +165,6 @@ export async function registerImapTools(server: McpServer, cfg?: AppConfig): Pro
         const result = await getEmailBody(c, params as {
           uid: number;
           folder?: string;
-          text_only?: boolean;
         });
         return {
           content: [{ type: 'text', text: JSON.stringify(result, null, 2) }],
