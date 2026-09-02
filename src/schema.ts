@@ -67,6 +67,7 @@ export const ListFoldersResponseSchema = z.object({
 export type ListFoldersResponse = z.infer<typeof ListFoldersResponseSchema>;
 
 export const SearchResultSchema = z.object({
+  index: z.number().int().nonnegative(),
   uid: z.number().int().positive(),
   subject: z.string(),
   from: z.string(),

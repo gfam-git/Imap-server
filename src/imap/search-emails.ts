@@ -59,18 +59,22 @@ export async function searchEmails(
 
   // Search for message UIDs
   const uidsResult = await client.search(searchQuery, { uid: true });
-  const uids = uidsResult === false ? [] : uidsResult;
+  const uids = uidsResult === false ? [] : uidsResult.reverse();
 
   // Get total count
   const total = uids.length;
 
   // Fetch envelope info for matching messages
-  const limit = opts.limit || 50;
+  const limit = opts.limit || 10;
   const offset = opts.offset || 0;
-  const slicedUids = uids.slice(offset, offset + limit);
+  const slicedUids = uids.slice();
 
-  const results: Array<{ uid: number; subject: string; from: string; date: string; message_id: string; }> = [];
+  const results: Array<{ index: number; uid: number; subject: string; from: string; date: string; message_id: string; }> = [];
   for (const uid of slicedUids) {
+    const index = offset + results.length;
+    if (results.length >= limit) {
+      break;
+    }
     try {
       const msg = await client.fetchOne(uid, {
         uid: true,
@@ -78,13 +82,14 @@ export async function searchEmails(
         source: { maxLength: 500 },
       });
       if (!msg) {
-        results.push({ uid, subject: '(fetch error)', from: '', date: '', message_id: ''});
+        results.push({ index: index, uid, subject: '(fetch error)', from: '', date: '', message_id: ''});
         continue;
       }
       const fromAddr = msg.envelope?.from?.[0];
       const from = fromAddr?.name ? `${fromAddr.name} <${fromAddr.address}>` : fromAddr?.address || '';
 
       results.push({
+        index: index,
         uid: msg.uid || uid,
         subject: msg.envelope?.subject || '(no subject)',
         from,
@@ -92,7 +97,7 @@ export async function searchEmails(
         message_id: msg.envelope?.messageId || ''
       });
     } catch {
-      results.push({ uid, subject: '(fetch error)', from: '', date: '', message_id: '' });
+      results.push({ index: index, uid, subject: '(fetch error)', from: '', date: '', message_id: '' });
     }
   }
 

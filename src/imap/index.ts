@@ -28,7 +28,7 @@ const searchEmailsParams = z.object({
   date_to: z.string().optional().describe('ISO 8601 date'),
   keyword: z.string().optional().describe('General body/keyword search'),
   unread_only: z.boolean().optional().describe('Only unread messages'),
-  limit: z.number().int().optional().describe('Max results, default 50'),
+  limit: z.number().int().optional().describe('Max results, default 10'),
   offset: z.number().int().optional().describe('Pagination offset, default 0'),
 });
 
