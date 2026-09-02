@@ -71,8 +71,7 @@ export const SearchResultSchema = z.object({
   subject: z.string(),
   from: z.string(),
   date: z.string(),
-  message_id: z.string(),
-  snippet: z.string(),
+  message_id: z.string()
 });
 export type SearchResult = z.infer<typeof SearchResultSchema>;
 

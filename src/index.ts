@@ -11,7 +11,7 @@ import { closeConnections } from './connection.js';
 async function main() {
   const server = new McpServer({
     name: 'imap-mcp',
-    version: '0.1.0',
+    version: '0.1.3',
   });
 
   // Register all IMAP tools (Phase 1/2)
