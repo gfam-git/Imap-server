@@ -96,20 +96,6 @@ export const EmailAttachmentSchema = z.object({
 });
 export type EmailAttachment = z.infer<typeof EmailAttachmentSchema>;
 
-export const FetchEmailResponseSchema = z.object({
-  uid: z.number().int().positive(),
-  subject: z.string(),
-  from: AddressSchema,
-  to: z.array(AddressSchema),
-  cc: z.array(AddressSchema).optional(),
-  date: z.string(),
-  message_id: z.string(),
-  body_text: z.string().optional(),
-  body_html: z.string().optional(),
-  attachments: z.array(EmailAttachmentSchema).optional(),
-});
-export type FetchEmailResponse = z.infer<typeof FetchEmailResponseSchema>;
-
 export const EmailBodyResponseSchema = z.object({
   body_text: z.string().optional(),
   body_html: z.string().optional(),

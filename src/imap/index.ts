@@ -2,7 +2,6 @@ import { McpServer } from '@modelcontextprotocol/server';
 import { config as appConfig, type AppConfig } from '../config.js';
 import { listFolders } from './list-folders.js';
 import { searchEmails } from './search-emails.js';
-import { fetchEmail } from './fetch-email.js';
 import { getEmailBody } from './email-body.js';
 import { getEmailHeaders } from './email-headers.js';
 import { markAsRead } from './flags.js';
@@ -140,35 +139,6 @@ export async function registerImapTools(server: McpServer, cfg?: AppConfig): Pro
           unread_only?: boolean;
           limit?: number;
           offset?: number;
-        });
-        return {
-          content: [{ type: 'text', text: JSON.stringify(result, null, 2) }],
-        };
-      } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : String(err);
-        return {
-          content: [{ type: 'text', text: `Error: ${message}` }],
-          isError: true,
-        };
-      }
-    }
-  );
-
-  // fetch_email
-  server.registerTool(
-    'fetch_email',
-    {
-      title: 'Fetch Email',
-      description: 'Fetch full email content including headers, body, and attachments',
-      inputSchema: fetchEmailParams,
-    },
-    async (params) => {
-      try {
-        const result = await fetchEmail(c, params as {
-          uid: number;
-          folder?: string;
-          include_body?: boolean;
-          include_attachments?: boolean;
         });
         return {
           content: [{ type: 'text', text: JSON.stringify(result, null, 2) }],
