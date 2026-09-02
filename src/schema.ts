@@ -97,7 +97,9 @@ export const EmailAttachmentSchema = z.object({
 export type EmailAttachment = z.infer<typeof EmailAttachmentSchema>;
 
 export const EmailBodyResponseSchema = z.object({
-  body: z.string().optional()
+  body: z.string().optional(),
+  body_text: z.string().optional(),
+  body_html: z.string().optional(),
 });
 export type EmailBodyResponse = z.infer<typeof EmailBodyResponseSchema>;
 
