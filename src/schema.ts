@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-// Shared request schemas
+// Request schemas
 export const FolderParamSchema = z.object({
   folder: z.string().optional().describe('IMAP folder name, default "INBOX"'),
 });
@@ -14,30 +14,36 @@ export const UidFolderParamSchema = z.object({
   folder: z.string().optional().describe('Source IMAP folder'),
 });
 
-// Shared response schemas
+// Response schemas
+export const SharedResponseSchema = z.object({
+  success: z.boolean().default(true).optional(),
+  message: z.string().optional()
+});
+export type SharedResponse = z.infer<typeof SharedResponseSchema>;
+
 export const ReadFlagResponseSchema = z.object({
   uid: z.number().int().positive(),
-  read: z.boolean(),
-});
+  read: z.boolean()
+}).and(SharedResponseSchema);
 export type ReadFlagResponse = z.infer<typeof ReadFlagResponseSchema>;
 
 export const MoveEmailResponseSchema = z.object({
   uid: z.number().int().positive(),
   from: z.string(),
   to: z.string(),
-});
+}).and(SharedResponseSchema);
 export type MoveEmailResponse = z.infer<typeof MoveEmailResponseSchema>;
 
 export const DeleteEmailResponseSchema = z.object({
   uid: z.number().int().positive(),
-  status: z.string(),
-});
+  status: z.string()
+}).and(SharedResponseSchema);;
 export type DeleteEmailResponse = z.infer<typeof DeleteEmailResponseSchema>;
 
 export const CreateFolderResponseSchema = z.object({
   name: z.string(),
-  created: z.boolean(),
-});
+  created: z.boolean()
+}).and(SharedResponseSchema);;
 export type CreateFolderResponse = z.infer<typeof CreateFolderResponseSchema>;
 
 export const ListUnreadResponseSchema = z.object({
@@ -49,8 +55,8 @@ export const ListUnreadResponseSchema = z.object({
       from: z.string(),
       date: z.string(),
     })
-  ),
-});
+  )
+}).and(SharedResponseSchema);
 export type ListUnreadResponse = z.infer<typeof ListUnreadResponseSchema>;
 
 // Phase 1 specific schemas
@@ -59,11 +65,11 @@ export const FolderInfoSchema = z.object({
   name: z.string(),
   delimiter: z.string(),
   flags: z.array(z.string()),
-});
+}).and(SharedResponseSchema);
 
 export const ListFoldersResponseSchema = z.object({
-  folders: z.array(FolderInfoSchema),
-});
+  folders: z.array(FolderInfoSchema)
+}).and(SharedResponseSchema);
 export type ListFoldersResponse = z.infer<typeof ListFoldersResponseSchema>;
 
 export const SearchResultSchema = z.object({
@@ -73,34 +79,32 @@ export const SearchResultSchema = z.object({
   from: z.string(),
   date: z.string(),
   message_id: z.string()
-});
+}).and(SharedResponseSchema);
 export type SearchResult = z.infer<typeof SearchResultSchema>;
 
 export const SearchEmailsResponseSchema = z.object({
   total: z.number().int().nonnegative(),
-  results: z.array(SearchResultSchema),
-});
+  results: z.array(SearchResultSchema)
+}).and(SharedResponseSchema);
 export type SearchEmailsResponse = z.infer<typeof SearchEmailsResponseSchema>;
 
 export const AddressSchema = z.object({
   address: z.string(),
-  name: z.string(),
-});
+  name: z.string()
+}).and(SharedResponseSchema);
 export type Address = z.infer<typeof AddressSchema>;
 
 export const EmailAttachmentSchema = z.object({
   name: z.string(),
   size: z.number().int().nonnegative(),
   content_type: z.string(),
-  content_base64: z.string().optional(),
-});
+  content_base64: z.string().optional()
+}).and(SharedResponseSchema);
 export type EmailAttachment = z.infer<typeof EmailAttachmentSchema>;
 
 export const EmailBodyResponseSchema = z.object({
-  body: z.string().optional(),
-  body_text: z.string().optional(),
-  body_html: z.string().optional(),
-});
+  body: z.string().optional()
+}).and(SharedResponseSchema);
 export type EmailBodyResponse = z.infer<typeof EmailBodyResponseSchema>;
 
 export const EmailHeadersResponseSchema = z.object({
@@ -111,8 +115,8 @@ export const EmailHeadersResponseSchema = z.object({
   date: z.string(),
   message_id: z.string(),
   in_reply_to: z.string().optional(),
-  headers: z.record(z.string(), z.string()),
-});
+  headers: z.record(z.string(), z.string())
+}).and(SharedResponseSchema);
 export type EmailHeadersResponse = z.infer<typeof EmailHeadersResponseSchema>;
 
 export const EmailWaitingResponseSchema = z.object({
@@ -122,6 +126,6 @@ export const EmailWaitingResponseSchema = z.object({
   subject: z.string().optional(),
   from: z.string().optional(),
   date: z.string().optional(),
-  body_text: z.string().optional(),
-});
+  body_text: z.string().optional()
+}).and(SharedResponseSchema);
 export type EmailWaitingResponse = z.infer<typeof EmailWaitingResponseSchema>;
