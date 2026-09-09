@@ -7,7 +7,9 @@ export function getConverterOptions(): Partial<NodeHtmlMarkdownOptions> {
     if (!converterOptions) {
         converterOptions = {
             ignore: ['script', 'style'],
-            useLinkReferenceDefinitions: true            
+            useLinkReferenceDefinitions: false,  // I set this to false, as link reference format was causing issues with truncated links
+            keepDataImages: false,
+            maxConsecutiveNewlines: 2
         };
     }
 

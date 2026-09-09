@@ -95,7 +95,7 @@ export async function getEmailBody(
 
   const partMessage = await client.fetchOne(opts.uid, {
     bodyParts: [usePart.part]
-  }, {uid: true})
+  }, {uid: true, binary: true})
 
   await client.mailboxClose();
 
@@ -106,13 +106,14 @@ export async function getEmailBody(
     };
   }
 
-  const body = partMessage.bodyParts?.get(usePart.part)?.toString();
+  const body = partMessage.bodyParts?.get(usePart.part)?.toString('binary');
+  // const markdown = body;
   const markdown = `# ${subject}
 _Sent${from ? ` from ${from}` : ''}${to ? ` to ${to}` : ''}${date ? ` on ${date}` : ''}_
 
 ---
 
-${body ? converter.translate(body) : ''}` 
+${body ? converter.translate(body).replaceAll(/\|\s?-{4,}\s?/g, "| --- ") : ''}` 
 
   return {
     success: true,
