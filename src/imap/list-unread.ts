@@ -43,7 +43,7 @@ export async function listUnread(
       const msg = await client.fetchOne(uid, {
         uid: true,
         envelope: true,
-      });
+      }, {uid: true});
 
       if (msg && msg.envelope) {
         const fromAddr = msg.envelope.from?.[0];

@@ -20,7 +20,7 @@ export async function getEmailHeaders(
     uid: true,
     envelope: true,
     headers: true,
-  });
+  }, {uid: true});
 
   if (!msg) {
     await client.mailboxClose();

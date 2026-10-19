@@ -79,8 +79,7 @@ export async function searchEmails(
       const msg = await client.fetchOne(uid, {
         uid: true,
         envelope: true,
-        source: { maxLength: 500 },
-      });
+      }, {uid: true});
       if (!msg) {
         results.push({ index: index, uid, subject: '(fetch error)', from: '', date: '', message_id: ''});
         continue;
